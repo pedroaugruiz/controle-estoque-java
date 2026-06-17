@@ -38,6 +38,18 @@ public class Estoque {
 
             System.out.printf("Preço: R$ %.2f%n", produto.getPreco());
 
+            System.out.println("Estoque mínimo: " + produto.getEstoqueMinimo());
+
+            if (produto.estaComEstoqueCritico()) {
+
+                System.out.println("🔴 ESTOQUE CRÍTICO");
+
+            } else if (produto.estaComEstoqueBaixo()) {
+
+                System.out.println("🟡 ESTOQUE BAIXO");
+
+            }
+
         }
 
     }
@@ -84,6 +96,30 @@ public class Estoque {
 
         // Retorna falha
         return false;
+
+    }
+
+    // Procura produtos que contenham o texto informado
+    public ArrayList<Produto> buscarProdutosPorNome(String nome) {
+
+        // Lista de resultados
+        ArrayList<Produto> resultados = new ArrayList<>();
+
+        // Percorre todos os produtos
+        for (Produto produto : produtos) {
+
+            // Verifica se o nome contém o texto pesquisado
+            if (produto.getNome()
+                    .toLowerCase()
+                    .contains(nome.toLowerCase())) {
+
+                resultados.add(produto);
+
+            }
+
+        }
+
+        return resultados;
 
     }
 

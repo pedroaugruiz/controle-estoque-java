@@ -1,6 +1,8 @@
 import model.Produto;
 import model.Estoque;
 
+import java.util.ArrayList;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -9,11 +11,11 @@ public class Main {
         Estoque estoque = new Estoque();
 
         // Cria alguns produtos
-        Produto arroz = new Produto(1, "Arroz", 50, 29.90);
+        Produto arroz = new Produto(1, "Arroz", 50, 29.90, 10, 20);
 
-        Produto feijao = new Produto(2, "Feijão", 30, 8.50);
+        Produto feijao = new Produto(2, "Feijão", 12, 8.50, 10, 15);
 
-        Produto macarrao = new Produto(3, "Macarrão", 20, 6.90);
+        Produto macarrao = new Produto(3, "Macarrão", 8, 6.90, 10, 12);
 
         // Adiciona os produtos ao estoque
         estoque.adicionarProduto(arroz);
@@ -41,6 +43,15 @@ public class Main {
 
         // Lista novamente os produtos
         estoque.listarProdutos();
+
+        ArrayList<Produto> resultados =
+                estoque.buscarProdutosPorNome("arroz");
+
+        for (Produto produto : resultados) {
+
+            System.out.println(produto.getNome());
+
+        }
 
     }
 

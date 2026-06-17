@@ -15,13 +15,28 @@ public class Produto {
     // Preço unitário do produto
     private double preco;
 
+    // Quantidade mínima aceitável antes do estoque ser considerado crítico
+    private int estoqueMinimo;
+
+    // Quantidade para aviso de estoque baixo
+    private int estoqueAlerta;
+
     // Construtor responsável por criar um produto
-    public Produto(int id, String nome, int quantidade, double preco) {
+    public Produto(
+            int id,
+            String nome,
+            int quantidade,
+            double preco,
+            int estoqueMinimo,
+            int estoqueAlerta
+    ) {
 
         this.id = id;
         this.nome = nome;
         this.quantidade = quantidade;
         this.preco = preco;
+        this.estoqueMinimo = estoqueMinimo;
+        this.estoqueAlerta = estoqueAlerta;
 
     }
 
@@ -43,6 +58,31 @@ public class Produto {
     // Retorna o preço do produto
     public double getPreco() {
         return preco;
+    }
+
+    // Retorna o estoque mínimo do produto
+    public int getEstoqueMinimo() {
+        return estoqueMinimo;
+    }
+
+    // Retorna o estoque de alerta
+    public int getEstoqueAlerta() {
+        return estoqueAlerta;
+    }
+
+    // Verifica se o estoque está crítico
+    public boolean estaComEstoqueCritico() {
+
+        return quantidade <= estoqueMinimo;
+
+    }
+
+    // Verifica se o estoque está baixo
+    public boolean estaComEstoqueBaixo() {
+
+        return quantidade > estoqueMinimo
+                && quantidade <= estoqueAlerta;
+
     }
 
     // Altera o id do produto
@@ -71,6 +111,16 @@ public class Produto {
         // Não permite preço negativo
         if (preco >= 0) {
             this.preco = preco;
+        }
+
+    }
+
+    // Altera o estoque mínimo do produto
+    public void setEstoqueMinimo(int estoqueMinimo) {
+
+        // Não permite estoque mínimo negativo
+        if (estoqueMinimo >= 0) {
+            this.estoqueMinimo = estoqueMinimo;
         }
 
     }

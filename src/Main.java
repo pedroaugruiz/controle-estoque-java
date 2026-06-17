@@ -25,6 +25,25 @@ public class Main {
         // Exibe todos os produtos cadastrados
         estoque.listarProdutos();
 
+        // Remove o produto de ID 2
+        boolean removido = estoque.removerProdutoPorId(2);
+
+        // Verifica o resultado da remoção
+        if (removido) {
+
+            System.out.println("Produto removido com sucesso.");
+
+        } else {
+
+            System.out.println("Produto não encontrado.");
+
+        }
+
+        // Lista novamente os produtos
+        estoque.listarProdutos();
+
     }
+
+
 
 }

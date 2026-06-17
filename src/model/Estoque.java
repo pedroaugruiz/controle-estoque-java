@@ -42,5 +42,49 @@ public class Estoque {
 
     }
 
+    // Procura um produto pelo ID
+    public Produto buscarProdutoPorId(int id) {
+
+        // Percorre todos os produtos da lista
+        for (Produto produto : produtos) {
+
+            // Verifica se o ID do produto é igual ao ID procurado
+            if (produto.getId() == id) {
+
+                // Retorna o produto encontrado
+                return produto;
+
+            }
+
+        }
+
+        // Retorna null caso não encontre nenhum produto
+        return null;
+
+    }
+
+    // Remove um produto pelo ID
+    public boolean removerProdutoPorId(int id) {
+
+        // Procura o produto na lista
+        for (Produto produto : produtos) {
+
+            // Verifica se encontrou o produto
+            if (produto.getId() == id) {
+
+                // Remove o produto da lista
+                produtos.remove(produto);
+
+                // Retorna sucesso
+                return true;
+
+            }
+
+        }
+
+        // Retorna falha
+        return false;
+
+    }
 
 }

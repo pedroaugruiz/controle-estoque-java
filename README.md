@@ -11,7 +11,7 @@ Sistema de controle de estoque offline desenvolvido em Java.
 
 ## Objetivo
 
-Desenvolver um sistema de controle de estoque para uma empresa familiar, aplicando conceitos de programação orientada a objetos, banco de dados e versionamento.
+Desenvolver um sistema de controle de estoque para uma empresa, aplicando conceitos de programação orientada a objetos, banco de dados e versionamento.
 
 ## Status
 

@@ -18,17 +18,12 @@ public class Produto {
     // Quantidade mínima aceitável antes do estoque ser considerado crítico
     private int estoqueMinimo;
 
-    // Quantidade para aviso de estoque baixo
-    private int estoqueAlerta;
-
     // Construtor responsável por criar um produto
     public Produto(
-            int id,
             String nome,
             int quantidade,
             double preco,
-            int estoqueMinimo,
-            int estoqueAlerta
+            int estoqueMinimo
     ) {
 
         this.id = id;
@@ -36,7 +31,6 @@ public class Produto {
         this.quantidade = quantidade;
         this.preco = preco;
         this.estoqueMinimo = estoqueMinimo;
-        this.estoqueAlerta = estoqueAlerta;
 
     }
 
@@ -65,11 +59,6 @@ public class Produto {
         return estoqueMinimo;
     }
 
-    // Retorna o estoque de alerta
-    public int getEstoqueAlerta() {
-        return estoqueAlerta;
-    }
-
     // Verifica se o estoque está crítico
     public boolean estaComEstoqueCritico() {
 
@@ -80,9 +69,14 @@ public class Produto {
     // Verifica se o estoque está baixo
     public boolean estaComEstoqueBaixo() {
 
-        return quantidade > estoqueMinimo
-                && quantidade <= estoqueAlerta;
+        // Calcula automaticamente o limite de alerta
+        int limiteAlerta = Math.max(
+                estoqueMinimo + 5,
+                (int) (estoqueMinimo * 1.5)
+        );
 
+        return quantidade > estoqueMinimo
+                && quantidade <= limiteAlerta;
     }
 
     // Altera o id do produto
@@ -139,7 +133,7 @@ public class Produto {
     }
 
     // Remove uma quantidade do estoque do produto
-    public void removerEstoque(int quantidadeRemovida) {
+    public boolean removerEstoque(int quantidadeRemovida) {
 
         // Verifica se a quantidade removida é maior que zero
         // e se existe estoque suficiente para remover
@@ -148,7 +142,33 @@ public class Produto {
             // Subtrai a quantidade removida da quantidade atual
             this.quantidade -= quantidadeRemovida;
 
+            // Retorna verdadeiro porque conseguiu remover
+            return true;
+
         }
+
+        // Retorna falso porque não conseguiu remover
+        return false;
+    }
+
+    // Define como o produto será exibido no console
+    @Override
+    public String toString() {
+
+        return """
+            ------------------
+            ID: %d
+            Nome: %s
+            Quantidade: %d
+            Preço: R$ %.2f
+            Estoque mínimo: %d
+            """.formatted(
+                id,
+                nome,
+                quantidade,
+                preco,
+                estoqueMinimo
+        );
 
     }
 

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 // Classe responsável por armazenar todos os produtos
 public class Estoque {
 
+    private int proximoId = 1;
+
     // Lista que armazenará os produtos cadastrados
     private ArrayList<Produto> produtos;
 
@@ -19,6 +21,13 @@ public class Estoque {
     // Adiciona um produto à lista
     public void adicionarProduto(Produto produto) {
 
+        // Define automaticamente o ID do produto
+        produto.setId(proximoId);
+
+        // Aumenta o próximo ID para o próximo produto cadastrado
+        proximoId++;
+
+        // Adiciona o produto na lista
         produtos.add(produto);
 
     }
@@ -28,17 +37,7 @@ public class Estoque {
         // Percorre todos os produtos da lista
         for (Produto produto : produtos) {
 
-            System.out.println("------------------");
-
-            System.out.println("ID: " + produto.getId());
-
-            System.out.println("Nome: " + produto.getNome());
-
-            System.out.println("Quantidade: " + produto.getQuantidade());
-
-            System.out.printf("Preço: R$ %.2f%n", produto.getPreco());
-
-            System.out.println("Estoque mínimo: " + produto.getEstoqueMinimo());
+            System.out.println(produto);
 
             if (produto.estaComEstoqueCritico()) {
 
@@ -68,10 +67,12 @@ public class Estoque {
 
             }
 
+            System.out.println(produto);
         }
 
         // Retorna null caso não encontre nenhum produto
         return null;
+
 
     }
 
@@ -120,6 +121,56 @@ public class Estoque {
         }
 
         return resultados;
+
+    }
+
+    // Exibe um resumo geral do estoque
+    public void exibirResumoEstoque() {
+
+        // Armazena a quantidade total de itens
+        int quantidadeTotal = 0;
+
+        int produtosCriticos = 0;
+
+        int produtosAlerta = 0;
+
+        // Armazena o valor total do estoque
+        double valorTotal = 0;
+
+        // Percorre todos os produtos
+        for (Produto produto : produtos) {
+
+            // Soma todas as quantidades
+            quantidadeTotal += produto.getQuantidade();
+
+            // Soma o valor total do estoque
+            valorTotal += produto.getQuantidade() * produto.getPreco();
+
+            if (produto.estaComEstoqueCritico()) {
+                produtosCriticos++;
+            }
+
+            if (produto.estaComEstoqueBaixo()) {
+                produtosAlerta++;
+            }
+
+        }
+
+        System.out.println("==========================");
+
+        System.out.println("      RESUMO GERAL");
+
+        System.out.println("==========================");
+
+        System.out.printf("Produtos cadastrados : %d%n", produtos.size());
+
+        System.out.printf("Quantidade total     : %d%n", quantidadeTotal);
+
+        System.out.printf("Valor total          : R$ %.2f%n", valorTotal);
+
+        System.out.printf("Produtos críticos    : %d%n", produtosCriticos);
+
+        System.out.printf("Produtos em alerta   : %d%n", produtosAlerta);
 
     }
 
